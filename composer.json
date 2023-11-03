@@ -1,5 +1,5 @@
 {
-    "name": "comodolab/nova-help",
+    "name": "clevyr/nova-help",
     "description": "A Laravel Nova help field.",
     "keywords": [
         "laravel",
@@ -10,22 +10,26 @@
         {
             "name": "Alessandro Benoit",
             "email": "alessandro@comodolab.it"
+        },
+        {
+          "name": "Anthony Protano",
+          "email": "anthony@clevyr.com"
         }
     ],
     "license": "MIT",
     "require": {
-        "illuminate/support": "^5.0|^6.0|^7.0|^8.0|^9.0",
-        "php": ">=7.2.5"
+        "illuminate/support": "^5.0|^6.0|^7.0|^8.0|^9.0|^10.0",
+        "php": ">=8.1"
     },
     "autoload": {
         "psr-4": {
-            "Comodolab\\Nova\\Fields\\Help\\": "src/"
+            "Clevyr\\Nova\\Fields\\Help\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Comodolab\\Nova\\Fields\\Help\\FieldServiceProvider"
+                "Clevyr\\Nova\\Fields\\Help\\FieldServiceProvider"
             ]
         }
     },

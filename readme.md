@@ -1,7 +1,3 @@
-
-> **Warning**
-> This library is not maintained anymore but feel free to fork it. For info do not exitate [contacting me](https://github.com/micc83).
-
 # Laravel Nova Help Field
 
 A custom Nova fields which allows to show custom help messages within form, detail and index screens.
@@ -17,13 +13,13 @@ See [changelog here](changelog.md).
 Run this command in your nova project: 
 
 ```bash
-composer require comodolab/nova-help
+composer require clevyr/nova-help
 ```
 
 Then you can use the field in your resource as follow:
 
 ```php
-use Comodolab\Nova\Fields\Help\Help;
+use Clevyr\Nova\Fields\Help\Help;
 
 public function fields(Request $request)
 {

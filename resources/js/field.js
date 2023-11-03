@@ -1,5 +1,5 @@
-Nova.booting((Vue, router) => {
-    Vue.component('index-help', require('./components/IndexField').default);
-    Vue.component('detail-help', require('./components/DetailField').default);
-    Vue.component('form-help', require('./components/FormField').default);
-})
+Nova.booting((app) => {
+	app.component('IndexHelp', require('./components/IndexField').default);
+	app.component('DetailHelp', require('./components/DetailField').default);
+	app.component('FormHelp', require('./components/FormField').default);
+});

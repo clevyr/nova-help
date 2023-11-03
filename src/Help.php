@@ -1,6 +1,6 @@
 <?php
 
-namespace Comodolab\Nova\Fields\Help;
+namespace Clevyr\Nova\Fields\Help;
 
 use Exception;
 use Illuminate\Support\Arr;
@@ -8,7 +8,7 @@ use Laravel\Nova\Fields\Field;
 
 /**
  * Class Help
- * @package Comodolab\Nova\Fields\Help
+ * @package Clevyr\Help\Fields\Help
  * @property string $name
  */
 class Help extends Field
@@ -23,7 +23,7 @@ class Help extends Field
     /**
      * The meta data for the element.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     public $meta = [
         'sideLabel'   => false,
@@ -43,7 +43,7 @@ class Help extends Field
      *
      * @var array
      */
-    protected $svgIcons = [];
+    protected array $svgIcons = [];
 
     /**
      * The text alignment for the field's text in tables.
@@ -55,14 +55,14 @@ class Help extends Field
     /**
      * @var string
      */
-    public $type;
+    public string $type = 'info';
 
     /**
      * The built-in help types and their corresponding CSS classes.
      *
      * @var array
      */
-    public $types = [
+    public array $types = [
         'success' => 'bg-success-light text-success-dark',
         'info' => 'bg-info-light text-info-dark',
         'danger' => 'bg-danger-light text-danger-dark',
@@ -93,7 +93,7 @@ class Help extends Field
      */
     private function loadDefaultIcons(): self
     {
-        $this->svgIcons = require(dirname(__DIR__) . '/icons.php');
+        $this->svgIcons = require __DIR__ . '/../icons.php';
 
         return $this;
     }
@@ -104,7 +104,7 @@ class Help extends Field
      * @param  array  $types
      * @return $this
      */
-    public function addTypes(array $types)
+    public function addTypes(array $types): static
     {
         $this->types = array_merge($this->types, $types);
 
@@ -117,7 +117,7 @@ class Help extends Field
      * @param  array  $types
      * @return $this
      */
-    public function types(array $types)
+    public function types(array $types): static
     {
         $this->types = $types;
 
@@ -126,11 +126,11 @@ class Help extends Field
 
     /**
      * @param string $title
-     * @param string|callable|null $message
+     * @param callable|string|null $message
      *
      * @return self
      */
-    public static function success(string $title = '', $message = null): self
+    public static function success(string $title = '', callable|string $message = null): self
     {
         return static::make($title, $message)
             ->type('success')
@@ -139,11 +139,11 @@ class Help extends Field
 
     /**
      * @param string $title
-     * @param string|callable|null $message
+     * @param callable|string|null $message
      *
      * @return self
      */
-    public static function info(string $title = '', $message = null): self
+    public static function info(string $title = '', callable|string $message = null): self
     {
         return static::make($title, $message)
             ->type('info')
@@ -152,11 +152,11 @@ class Help extends Field
 
     /**
      * @param string $title
-     * @param string|callable|null $message
+     * @param callable|string|null $message
      *
      * @return self
      */
-    public static function warning(string $title = '', $message = null): self
+    public static function warning(string $title = '', callable|string $message = null): self
     {
         return static::make($title, $message)
             ->type('warning')
@@ -165,11 +165,11 @@ class Help extends Field
 
     /**
      * @param string $title
-     * @param string|callable|null $message
+     * @param callable|string|null $message
      *
      * @return self
      */
-    public static function danger(string $title = '', $message = null): self
+    public static function danger(string $title = '', callable|string $message = null): self
     {
         return static::make($title, $message)
             ->type('danger')
@@ -178,11 +178,11 @@ class Help extends Field
 
     /**
      * @param string $title
-     * @param string|callable|null $message
+     * @param callable|string|null $message
      *
      * @return self
      */
-    public static function header(string $title = '', $message = null)
+    public static function header(string $title = '', callable|string $message = null): Help
     {
         return static::make($title, $message)
             ->type('header')
@@ -204,10 +204,10 @@ class Help extends Field
     }
 
     /**
-     * @param string|callable $message
+     * @param callable|string $message
      * @return Help
      */
-    public function message($message): self
+    public function message(callable|string $message): self
     {
         if (!is_string($message) && is_callable($message)) {
             $message = (string)$message();
@@ -302,7 +302,7 @@ class Help extends Field
      * @return array
      * @throws Exception
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         $this->validateCollapsible();
 
@@ -321,7 +321,7 @@ class Help extends Field
     private function validateCollapsible(): void
     {
         if (!Arr::get($this->meta, 'collapsible')){
-           return;
+            return;
         }
 
         if (Arr::get($this->meta, 'sideLabel')){

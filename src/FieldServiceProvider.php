@@ -1,6 +1,6 @@
 <?php
 
-namespace Comodolab\Nova\Fields\Help;
+namespace Clevyr\Nova\Fields\Help;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;
@@ -13,7 +13,7 @@ class FieldServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Nova::serving(function (ServingNova $event) {
             Nova::script('help', __DIR__.'/../dist/js/field.js');
